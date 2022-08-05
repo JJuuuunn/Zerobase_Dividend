@@ -11,7 +11,7 @@ spring:
     hibernate:
       ddl-auto: create
       use-new-id-generater-mappings: false
-    show-spl: true
+    show-sql: true
     defer-datasource-initialization: true
 
   datasource:

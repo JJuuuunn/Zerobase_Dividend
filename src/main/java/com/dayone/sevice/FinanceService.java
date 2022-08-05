@@ -33,6 +33,7 @@ public class FinanceService {
 
         // 3. 결과 조합 후 반환
 
+        // 방법 1,2 결과는 동일
         //방법 1
 //        List<Dividend> dividends = new ArrayList<>();
 //        for (var entity : dividendEntities) {
@@ -54,6 +55,6 @@ public class FinanceService {
                 .ticker(company.getTicker())
                 .name(company.getName())
                 .build()
-                , null);
+                , dividends);
     }
 }
