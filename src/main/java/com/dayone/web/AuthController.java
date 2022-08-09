@@ -23,16 +23,17 @@ public class AuthController {
 
     // 회원 가입을 위한 API
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody Auth.SignUp request) {
+    public ResponseEntity<?> signup(@RequestBody Auth.SighUp request) {
         var result = this.memberService.register(request);
         return ResponseEntity.ok(result);
     }
 
     // 로그인을 위한 API
     @PostMapping("/signin")
-    public ResponseEntity<?> signin(@RequestBody Auth.SignIn request) {
+    public ResponseEntity<?> signin(@RequestBody Auth.SighIn request) {
         var member = this.memberService.authenticate(request);
         var token = this.tokenProvider.generateToken(member.getUsername(), member.getRoles());
+        log.info("user login -> " + request.getUsername());
         return ResponseEntity.ok(token);
     }
 }

@@ -1,5 +1,6 @@
 package com.dayone.model;
 
+import com.dayone.persist.entity.MemberEntity;
 import lombok.Data;
 
 import java.util.List;
@@ -7,13 +8,13 @@ import java.util.List;
 public class Auth {
 
     @Data
-    public static class SignIn {
+    public static class SighIn {
         private String username;
         private String password;
     }
 
     @Data
-    public static class SignUp {
+    public static class SighUp {
         private String username;
         private String password;
         private List<String> roles;
@@ -26,6 +27,4 @@ public class Auth {
                     .build();
         }
     }
-
-
 }

@@ -1,4 +1,4 @@
-package com.dayone.model;
+package com.dayone.persist.entity;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Builder
+@Entity(name = "MEMBER")
 @Getter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "MEMBER")
 public class MemberEntity implements UserDetails {
 
     @Id

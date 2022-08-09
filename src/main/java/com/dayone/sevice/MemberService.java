@@ -1,7 +1,8 @@
 package com.dayone.sevice;
 
+import com.dayone.exception.impl.AlreadyExistUserException;
 import com.dayone.model.Auth;
-import com.dayone.model.MemberEntity;
+import com.dayone.persist.entity.MemberEntity;
 import com.dayone.persist.MemberRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +26,10 @@ public class MemberService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("couldn't find user -> " + username));
     }
 
-    public MemberEntity register(Auth.SignUp member) {
-        boolean exists = this.memberRepository.existsByUsername(member.getUsername());
+    public MemberEntity register(Auth.SighUp member) {
+        boolean exists = this.memberRepository.existByUsername(member.getUsername());
         if (exists) {
-            throw new RuntimeException("이미 사용 중인 아이디 입니다.");
+            throw new AlreadyExistUserException();
         }
 
         member.setPassword(this.passwordEncoder.encode(member.getPassword()));
@@ -36,14 +37,12 @@ public class MemberService implements UserDetailsService {
         return result;
     }
 
-    public MemberEntity authenticate(Auth.SignIn member) {
+    public MemberEntity authenticate(Auth.SighIn member) {
         var user = this.memberRepository.findByUsername(member.getUsername())
-                .orElseThrow(() -> new RuntimeException("존재하지 않는 ID 입니다."));
-
+                                        .orElseThrow(() -> new RuntimeException("존재하지 않는 ID 입니다."));
         if (this.passwordEncoder.matches(member.getPassword(), user.getPassword())) {
             throw new RuntimeException("비밀번호가 일치하지 않습니다.");
         }
-
         return user;
     }
 }
