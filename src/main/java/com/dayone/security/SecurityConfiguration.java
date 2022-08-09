@@ -24,25 +24,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic().disable()
+        http
+                .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests()
-                .antMatchers("/**/signup", "/**/signin").permitAll()
+                    .authorizeRequests()
+                        .antMatchers("/**/signup", "/**/signin").permitAll()
                 .and()
-                .addFilterBefore(this.authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                    .addFilterBefore(this.authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
     }
 
     @Override
     public void configure(final WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/h2-console/**");
+        web.ignoring()
+                .antMatchers("/h2-console/**");
     }
 
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
-
+        return super.authenticationManagerBean();
     }
-
 }
