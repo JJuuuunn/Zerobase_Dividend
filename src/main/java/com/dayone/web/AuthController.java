@@ -32,7 +32,9 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestBody Auth.SighIn request) {
         var member = this.memberService.authenticate(request);
-        var token = this.tokenProvider.generateToken(member.getUsername(), member.getRoles());
+        var token = this.tokenProvider.generateToken(member.getUsername(), member.getRole());//
+//        var token = this.tokenProvider.generateToken(member.getUsername(), member.getRoles());
+
         log.info("user login -> " + request.getUsername());
         return ResponseEntity.ok(token);
     }

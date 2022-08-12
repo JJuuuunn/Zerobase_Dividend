@@ -27,6 +27,9 @@ spring:
   jwt:
     secret: ZGF5b25lLXNwcmluZy1ib290LWpdmlkZW5kLXByb2plY3QtdHV0bj#pYWwtand)LXNlY3JldC1rZXkK
 
+  main:
+    allow-bean-definition-overriding: true
+
 scheduler:
   scrap:
     yahoo: "0 0 0 * * *"

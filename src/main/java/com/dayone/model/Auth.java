@@ -17,13 +17,15 @@ public class Auth {
     public static class SighUp {
         private String username;
         private String password;
-        private String roles;
+//        private List<String> roles;
+        private String role;//
 
         public MemberEntity toEntity() {
             return MemberEntity.builder()
                     .username(this.username)
                     .password(this.password)
-                    .roles(this.roles)
+//                    .roles(this.roles)
+                    .role(this.role)//
                     .build();
         }
     }

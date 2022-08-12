@@ -9,16 +9,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Builder
-@Entity(name = "MEMBER")
 @Getter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity(name = "MEMBER")
 public class MemberEntity implements UserDetails {
 
     @Id
@@ -29,11 +28,18 @@ public class MemberEntity implements UserDetails {
 
     private String password;
 
-    private String roles;
+//    private List<String> roles;
+    private String role;//
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+//        return this.roles.stream()
+//                .map(SimpleGrantedAuthority::new)
+//                .collect(Collectors.toList());
+
+        ArrayList<GrantedAuthority> auth = new ArrayList<>();
+        auth.add(new SimpleGrantedAuthority(role));
+        return auth;//
     }
 
     @Override
