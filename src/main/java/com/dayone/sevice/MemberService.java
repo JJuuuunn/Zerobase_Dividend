@@ -22,13 +22,15 @@ public class MemberService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return this.memberRepository.findByUsername(username)
+        return (UserDetails) this.memberRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("couldn't find user -> " + username));
     }
 
     public MemberEntity register(Auth.SighUp member) {
-        boolean exists = this.memberRepository.existByUsername(member.getUsername());
-        if (exists) {
+//        boolean exists = this.memberRepository.existByUsername(member.getUsername());
+//        if (exists) {
+
+        if (member.getUsername().equals(null)) {
             throw new AlreadyExistUserException();
         }
 

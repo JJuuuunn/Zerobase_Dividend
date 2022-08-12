@@ -29,7 +29,7 @@ public class CompanyController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('READ')")
+    @PreAuthorize("hasAnyRole('READ,ALL')")
     public ResponseEntity<?> searchCompany(final Pageable pageable) {
         Page<CompanyEntity> companies = this.companyService.getAllCompany(pageable);
         return ResponseEntity.ok(companies);
@@ -41,7 +41,7 @@ public class CompanyController {
      * @return
      */
     @PostMapping
-    @PreAuthorize("hasRole('WRITE')")
+    @PreAuthorize("hasAnyRole('WRITE,ALL')")
     public ResponseEntity<?> addCompany(@RequestBody Company request) {
         String ticker = request.getTicker().trim();
         if (ObjectUtils.isEmpty(ticker)) {
@@ -54,7 +54,7 @@ public class CompanyController {
     }
 
     @DeleteMapping("/{ticker}")
-    @PreAuthorize("hasRole('WRITE')")
+    @PreAuthorize("hasAnyRole('WRITE,ALL')")
     public ResponseEntity<?> deleteCompany(@PathVariable String ticker) {
         String companyName = this.companyService.deleteCompany(ticker);
         this.clearFinanceCache(companyName);

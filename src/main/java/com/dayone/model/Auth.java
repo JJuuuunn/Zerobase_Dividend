@@ -17,7 +17,7 @@ public class Auth {
     public static class SighUp {
         private String username;
         private String password;
-        private List<String> roles;
+        private String roles;
 
         public MemberEntity toEntity() {
             return MemberEntity.builder()

@@ -29,13 +29,11 @@ public class MemberEntity implements UserDetails {
 
     private String password;
 
-    private List<String> roles;
+    private String roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        return null;
     }
 
     @Override
